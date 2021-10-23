@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd">
+<context:component-scan base-package="com.he.service"/>
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="druidDataSource" />
+    </bean>
+    <!--配置事务增强通知-->
+    <!--transaction-manager加载指定的事务管理器-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--事务规则列表-->
+        <tx:attributes>
+            <!--propagation定义动作的规则-->
+            <!--REQUIRED阻断操作-->
+            <!--NOT_SUPPORTED非阻断操作-->
+            <!--对新增数据操作的规则定义-->
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <!--对修改数据操作的规则定义-->
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <!--对删除数据操作的规则定义-->
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <!--对查询数据操作的规则定义-->
+            <tx:method name="get*" propagation="NOT_SUPPORTED"/>
+            <tx:method name="select*" propagation="NOT_SUPPORTED"/>
+            <tx:method name="query*" propagation="NOT_SUPPORTED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--托管通知工具类-->
+    <bean name="advice" class="com.he.util.AdviceUtil"/>
+    <!-- 配置事务的切入  -->
+    <!-- execution(* com.dada.mapper.*.*(..)) com.dada.mapper里的全部类和全部方法  -->
+    <aop:config>
+        <!--切面定义在Service层-->
+        <aop:pointcut id="txPointCut" expression="execution(* com.he.service..*(..))"/>
+        <!--将事务增强通知与切面进行绑定-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
+        <!--切面织入-->
+        <aop:aspect ref="advice">
+            <aop:before method="before" pointcut-ref="txPointCut"/>
+            <aop:after method="after" pointcut-ref="txPointCut"/>
+            <aop:around method="around" pointcut-ref="txPointCut"/>
+            <aop:after-throwing method="exception" pointcut-ref="txPointCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

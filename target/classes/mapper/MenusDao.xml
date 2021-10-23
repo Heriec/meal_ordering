@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.he.dao.MenusDao">
+
+
+    <resultMap id="MenusMap" type="com.he.pojo.Menus">
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="burden" column="burden" jdbcType="VARCHAR"/>
+        <result property="brief" column="brief" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="OTHER"/>
+        <result property="sums" column="sums" jdbcType="OTHER"/>
+        <result property="price1" column="price1" jdbcType="OTHER"/>
+        <result property="sums1" column="sums1" jdbcType="OTHER"/>
+        <result property="imgpath" column="imgpath" jdbcType="VARCHAR"/>
+        <result property="types" column="types"/>
+    </resultMap>
+
+
+    <select id="queryById" resultMap="MenusMap">
+        select m.id,
+               m.name,
+               burden,
+               brief,
+               price,
+               sums,
+               price1,
+               sums1,
+               imgpath,
+               typeid,
+               t.id   tid,
+               t.name types
+        from menus m,
+             types t
+        where m.typeid = t.id
+          and m.id = #{id}
+    </select>
+    <select id="queryAllMenus" resultMap="MenusMap">
+        select m.id,
+               m.name,
+               burden,
+               brief,
+               price,
+               sums,
+               price1,
+               sums1,
+               imgpath,
+               typeid,
+               t.id   tid,
+               t.name types
+        from menus m,
+             types t
+        where m.typeid = t.id
+    </select>
+    <select id="queryAllByLimit" resultMap="MenusMap">
+        select m.id,
+               m.name,
+               burden,
+               brief,
+               price,
+               sums,
+               price1,
+               sums1,
+               imgpath,
+               typeid,
+               t.id   tid,
+               t.name tname
+        from menus m,
+             types t
+        where m.typeid = t.id limit #{offset }
+            , #{limit}
+    </select>
+
+    <insert id="insertMenus" keyProperty="id" useGeneratedKeys="true">
+        insert into menus(name, typeid, burden, brief, price, sums, price1, sums1, imgpath)
+        select #{name},
+               types.id,
+               #{burden},
+               #{brief},
+               #{price},
+               #{sums},
+               #{price1},
+               #{sums1},
+               #{imgpath}
+        from types
+        where types.name = #{types}
+    </insert>
+    <update id="updateMenus" parameterType="menus">
+        update menus
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="types != null">
+                typeid = (select types.id from types where types.name = #{types}),
+            </if>
+            <if test="burden != null and burden != ''">
+                burden = #{burden},
+            </if>
+            <if test="brief != null and brief != ''">
+                brief = #{brief},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="sums != null">
+                sums = #{sums},
+            </if>
+            <if test="price1 != null">
+                price1 = #{price1},
+            </if>
+            <if test="sums1 != null">
+                sums1 = #{sums1},
+            </if>
+            <if test="imgpath != null and imgpath != ''">
+                imgpath = #{imgpath},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="Integer">
+        delete
+        from menus
+        where id = #{id}
+    </delete>
+</mapper>

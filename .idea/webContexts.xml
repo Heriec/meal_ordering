@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/admin/admin_left.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/admin/main.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/admin/menus_add.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/admin/notice.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/admin/order.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/admin" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/qiantai/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/qiantai" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/qiantai/index_right.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/qiantai" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/qiantai/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/qiantai" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/public/qiantai/top.jsp" value="file://$PROJECT_DIR$/src/main/webapp/public/qiantai" />
+      </map>
+    </option>
+  </component>
+</project>

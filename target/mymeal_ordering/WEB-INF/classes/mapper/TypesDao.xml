@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.he.dao.TypesDao">
+
+    <resultMap type="com.he.pojo.Types" id="TypesMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="queryAll" resultMap="TypesMap">
+        select *
+        from types
+    </select>
+
+
+    <delete id="deleteTypes">
+        delete
+        from types
+        where id = #{id}
+    </delete>
+
+    <!--修改数据-->
+    <update id="updateTypes" parameterType="types">
+        update types
+        set name=#{name}
+        where id = #{id}
+    </update>
+
+    <!--根据id查询元素-->
+    <select id="queryById" resultMap="TypesMap">
+        select id, name
+        from apsfc.types
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <insert id="insertTypes" parameterType="types">
+        insert into types(id, name)
+        values (#{id}, #{name})
+    </insert>
+</mapper>
