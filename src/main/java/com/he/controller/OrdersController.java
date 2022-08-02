@@ -1,9 +1,9 @@
 package com.he.controller;
 
 
-import com.alipay.api.AlipayClient;
+/*import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradePagePayRequest;*/
 import com.he.config.AlipayConfig;
 import com.he.pojo.Menus;
 import com.he.pojo.Orders;
@@ -372,9 +372,9 @@ public class OrdersController {
 //                String info = new String(request.getParameter("WIDbody").getBytes("ISO-8859-1"),"UTF-8");
 
                 try {
-                    String result = AlipayUtil.pay(response, 1, 1, 1, 22222);
-                    request.setAttribute("result", result);
-                    System.out.println(result);
+//                    String result = AlipayUtil.pay(response, 1, 1, 1, 22222);
+//                    request.setAttribute("result", result);
+//                    System.out.println(result);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -409,7 +409,7 @@ public class OrdersController {
         }
         return "redirect:/menus/qiantai/allMenus";
     }
-    @RequestMapping("alipaySum")
+ /*   @RequestMapping("alipaySum")
     public Object alipayIumpSum(Model model, String payables, String subject, String body, HttpServletResponse response)
             throws Exception {
         // 获得初始化的AlipayClient
@@ -436,5 +436,5 @@ public class OrdersController {
         PrintWriter out = response.getWriter();
         out.print(result);
         return "qiantai/hello";
-    }
+    }*/
 }

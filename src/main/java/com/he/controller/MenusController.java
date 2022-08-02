@@ -49,11 +49,11 @@ public class MenusController {
     }
 
     @RequestMapping("/add")
-    public String insert(Menus menus, @RequestParam("img")MultipartFile multipartFile, HttpSession session) throws IOException {
+    public String insert(Menus menus, @RequestParam("img") MultipartFile multipartFile, HttpSession session) throws IOException {
         String realPath = session.getServletContext().getRealPath("");
         if (!multipartFile.isEmpty()) {
             String originalFilename = multipartFile.getOriginalFilename();
-            multipartFile.transferTo(new File(realPath +  "public\\img\\" + originalFilename));
+            multipartFile.transferTo(new File(realPath + "public\\img\\" + originalFilename));
             menus.setImgpath("img/" + originalFilename);
         }
         menus.setSums(0);
@@ -66,8 +66,8 @@ public class MenusController {
 
     @RequestMapping("allMenus")
     public String menusList(Model model) {
-        List<Types> typesList=typesService.queryAll();
-        model.addAttribute("typesList",typesList);
+        List<Types> typesList = typesService.queryAll();
+        model.addAttribute("typesList", typesList);
         List<Menus> list = menusService.queryAllMenus();
         model.addAttribute("list", list);
         return "/admin/menus";
@@ -97,36 +97,31 @@ public class MenusController {
     }
 
 
-
-
-
-
-
-//    qiantai处理
+    //    qiantai处理
     @RequestMapping("/qiantai/allMenus")
-    public String  qiantaimenusList(Model model ){
+    public String qiantaimenusList(Model model) {
         List<Menus> list = menusService.queryAllMenus();
         int sum = 0;
         Menus tmp = null;
-        for (int i = 0; i < list.size()-1; i++) {
+        for (int i = 0; i < list.size() - 1; i++) {
             for (int j = i; j < list.size(); j++) {
-                if (list.get(i).getSums1()<list.get(j).getSums1()){
-                    Collections.swap(list,i,j);
+                if (list.get(i).getSums1() < list.get(j).getSums1()) {
+                    Collections.swap(list, i, j);
                 }
             }
         }
-        model.addAttribute("list",list);
+        model.addAttribute("list", list);
         List<Types> typesList = typesService.queryAll();
-        model.addAttribute("typesLIst",typesList);
-        List<Notice> notices=noticeService.queryAll();
-        model.addAttribute("notice",notices);
+        model.addAttribute("typesLIst", typesList);
+        List<Notice> notices = noticeService.queryAll();
+        model.addAttribute("notice", notices);
         return "/qiantai/index";
     }
 
     @RequestMapping("qiantai/queryMenusById")
-    public String queryById(Model model,@Param("id") Integer id) {
+    public String queryById(Model model, @Param("id") Integer id) {
         Menus menus = menusService.queryById(id);
-        model.addAttribute("menus",menus);
+        model.addAttribute("menus", menus);
         return "qiantai/show";
     }
 }

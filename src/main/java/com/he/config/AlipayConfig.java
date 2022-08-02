@@ -39,8 +39,7 @@ public class AlipayConfig{
     public static String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
     // 日志地址
     public static String log_path = "E:\\Study Language\\JavaProject\\MyProject\\mymeal_ordering";
-    // ↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
+    // ↑↑↑↑↑↑↑↑↑↑请在这~~
     /**
      * 写日志，方便测试（看网站需求，也可以改成把记录存入数据库）
      *

@@ -2,14 +2,14 @@ package com.he.util;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.alipay.api.AlipayClient;
+/*import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.alipay.api.request.AlipayTradePagePayRequest;*/
 import com.he.config.AlipayConfig;
 
 public class AlipayUtil {
 
-    public static String pay(HttpServletResponse response,Integer id,Integer userid,Integer menuid,Integer menusum) throws Exception{
+/*    public static String pay(HttpServletResponse response,Integer id,Integer userid,Integer menuid,Integer menusum) throws Exception{
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 
@@ -29,5 +29,5 @@ public class AlipayUtil {
 
         //返回
         return result;
-    }
+    }*/
 }
